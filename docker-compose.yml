@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  hbase-pqs:
+    build: ./hbase-phoenix-query-server
+    ports:
+      - "8765:8765"
+  hbase-client:
+    build: ./hbase-phoenix-thin-client
+    depends_on:
+      - hbase-pqs
+    ports:
+      - "8080:8080"
+    links:
+      - hbase-pqs:hbase-pqs
+    environment:
+      - "url=jdbc:phoenix:thin:url=http://hbase-pqs:8765;serialization=PROTOBUF"
