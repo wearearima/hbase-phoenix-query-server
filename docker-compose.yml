@@ -2,7 +2,7 @@ version: '3'
 
 services:
   hbase-pqs:
-    build: ./hbase-phoenix-query-server
+    image: wearearima/hbase-pqs:0.0.1
     ports:
       - "8765:8765"
   hbase-client:
